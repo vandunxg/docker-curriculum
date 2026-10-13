@@ -7,11 +7,17 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Docker Curriculum',
+			defaultLocale: 'root',
+			locales: {
+				root: { label: 'English', lang: 'en' },
+				vi: { label: 'Tiếng Việt', lang: 'vi' },
+			},
 			tableOfContents: false,
 			customCss: ['./src/styles/custom.css', './src/styles/design.css'],
 			components: {
 				ThemeProvider: './src/components/ThemeProvider.astro',
 				ThemeSelect: './src/components/ThemeSelect.astro',
+				LanguageSelect: './src/components/LanguageSelect.astro',
 			},
 			head: [
 				{

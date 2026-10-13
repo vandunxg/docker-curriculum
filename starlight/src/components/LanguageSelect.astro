@@ -1,0 +1,69 @@
+---
+import Icon from '../../node_modules/@astrojs/starlight/user-components/Icon.astro';
+import { hasVietnameseMirror, localizePath, rootPath } from '../utils/language-switch';
+
+const currentLocale = Astro.locals.starlightRoute.locale;
+const activeLocale = currentLocale || 'root';
+const currentPath = Astro.url.pathname;
+const vietnameseDocuments = import.meta.glob('../content/docs/vi/**/*.{md,mdx}', { eager: true });
+const vietnameseAvailable = hasVietnameseMirror(Object.keys(vietnameseDocuments), rootPath(currentPath));
+const options = [
+	{
+		locale: 'root',
+		label: 'English',
+		path: localizePath(currentPath, 'root'),
+		available: true,
+	},
+	{
+		locale: 'vi',
+		label: 'Tiếng Việt',
+		path: localizePath(currentPath, 'vi'),
+		available: vietnameseAvailable,
+	},
+];
+---
+
+<starlight-lang-select class="dc-language-select" data-dc-language-select>
+	<label class="dc-language-control">
+		<Icon name="translate" class="dc-language-icon" />
+		<span class="sr-only">Select language</span>
+		<select aria-label="Select language" autocomplete="off">
+			{
+				options.map((option) => (
+					<option
+						value={option.path}
+						selected={option.locale === activeLocale}
+						disabled={!option.available}
+					>
+						{option.label}
+					</option>
+				))
+			}
+		</select>
+	</label>
+</starlight-lang-select>
+
+<script>
+	const setupLanguageSelect = () => {
+		document.querySelectorAll('[data-dc-language-select]').forEach((picker) => {
+			const select = picker.querySelector('select');
+			if (!(select instanceof HTMLSelectElement)) return;
+			const currentOption = Array.from(select.options).find(
+				(option) => option.value === window.location.pathname,
+			);
+			if (currentOption) select.value = currentOption.value;
+			if (picker.hasAttribute('data-initialized')) return;
+			picker.setAttribute('data-initialized', 'true');
+
+			select.addEventListener('change', () => {
+				const option = select.options[select.selectedIndex];
+				if (!option || option.disabled) return;
+				window.location.assign(`${option.value}${window.location.hash}`);
+			});
+		});
+	};
+
+	setupLanguageSelect();
+	document.addEventListener('astro:page-load', setupLanguageSelect);
+	window.addEventListener('pageshow', setupLanguageSelect);
+</script>

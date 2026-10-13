@@ -152,6 +152,16 @@ kbd { padding: .15rem .3rem; border: 1px solid var(--dc-border-strong, var(--sl-
 .theme-button-secondary { background: transparent; color: var(--dc-text-soft, var(--sl-color-gray-2)); }
 .theme-button-primary { border-color: var(--dc-accent, var(--sl-color-accent)); background: var(--dc-accent, var(--sl-color-accent)); color: var(--dc-canvas, var(--sl-color-black)); }
 
+/* Language switch */
+starlight-lang-select.dc-language-select { display: inline-flex; }
+.dc-language-control { display: inline-flex; align-items: center; gap: .42rem; min-height: 2.35rem; padding: .45rem .55rem; border: 1px solid transparent; border-radius: 6px; background: transparent; color: var(--dc-muted, var(--sl-color-gray-3)); cursor: pointer; }
+.dc-language-control:hover, .dc-language-control:focus-within { border-color: var(--dc-border, var(--sl-color-gray-6)); background: var(--dc-surface, var(--sl-color-gray-7)); color: var(--dc-text, var(--sl-color-white)); }
+.dc-language-icon { flex: 0 0 auto; color: var(--dc-accent, var(--sl-color-accent)); font-size: .95rem; }
+.dc-language-control select { min-width: 5.5rem; padding: 0 1rem 0 0; border: 0; outline: 0; background: transparent; color: inherit; font: 500 var(--sl-text-sm) var(--sl-font); cursor: inherit; }
+.dc-language-control select:disabled { cursor: not-allowed; }
+.dc-language-control option { background: var(--dc-surface-raised, var(--sl-color-black)); color: var(--dc-text, var(--sl-color-white)); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
 /* Homepage */
 body:has(.dc-home) .main-pane { padding-block-start: 0; }
 body:has(.dc-home) .sl-container { max-width: none !important; margin-inline: 0 !important; }
@@ -197,9 +207,13 @@ body:has(.dc-home) .sl-container { max-width: none !important; margin-inline: 0 
 	header.header .right-group { display: flex !important; gap: .35rem; }
 	header.header .right-group > .social-icons,
 	header.header .right-group > starlight-language-select { display: none !important; }
+	header.header .right-group > starlight-lang-select { display: inline-flex !important; }
 	header.header .right-group [data-theme-current],
 	header.header .right-group .theme-picker-caret { display: none; }
 	header.header .right-group .theme-picker-trigger { min-height: 2.25rem; padding: .45rem; }
+	.dc-language-control { min-height: 2.25rem; padding: .45rem; }
+	.dc-language-control select { min-width: 0; width: 1.15rem; padding: 0; color: transparent; }
+	.dc-language-control option { color: var(--dc-text, var(--sl-color-white)); }
 	.theme-dialog { margin: auto; }
 	.theme-dialog-footer { align-items: stretch; flex-direction: column; }
 	.theme-dialog-actions { justify-content: stretch; }
