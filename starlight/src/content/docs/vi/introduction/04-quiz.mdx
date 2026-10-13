@@ -1,0 +1,58 @@
+---
+title: Bài kiểm tra
+description: Kiểm tra kiến thức của bạn về container Docker, virtualization và các khái niệm cốt lõi trong kiến trúc được trình bày ở chương Giới thiệu.
+---
+
+import Quiz from '../../../../components/Quiz.astro';
+
+Kiểm tra mức độ hiểu của bạn về các khái niệm được trình bày trong chương **Giới thiệu**.
+
+<Quiz
+  title="Chương 1: Kiểm tra kiến thức về Giới thiệu"
+  questions={[
+    {
+      question: "Khác biệt cơ bản về kiến trúc giữa một Docker container và một Virtual Machine (VM) truyền thống là gì?",
+      options: [
+        "Virtual machine dùng chung kernel của OS host, còn container cần một guest operating system đầy đủ và phần cứng ảo",
+        "Container dùng chung kernel của hệ điều hành host và cô lập các process ở user space, trong khi VM ảo hóa phần cứng để chạy một guest OS đầy đủ",
+        "Container chỉ có thể chạy trên Linux, còn Virtual Machine chỉ có thể chạy trên Windows",
+        "Virtual machine không cần hypervisor hoặc OS host"
+      ],
+      correctIndex: 1,
+      explanation: "Container tận dụng kernel của OS host để cô lập các process của ứng dụng, loại bỏ phần overhead lớn về CPU, bộ nhớ và thời gian khởi động do guest operating system mà VM yêu cầu."
+    },
+    {
+      question: "Docker giải quyết vấn đề chính nào cho developer và đội ngũ vận hành phần mềm?",
+      options: [
+        "Docker tách ứng dụng khỏi môi trường host bằng cách đóng gói code và các dependency cùng nhau, bảo đảm ứng dụng chạy nhất quán giữa các môi trường development, test và cloud",
+        "Docker tự động viết code ứng dụng và sửa bug trong Python",
+        "Docker loại bỏ nhu cầu sử dụng cloud server bằng cách chạy ứng dụng mà không cần phần cứng compute",
+        "Docker thay thế các hệ thống quản lý phiên bản như Git"
+      ],
+      correctIndex: 0,
+      explanation: "Docker đóng gói ứng dụng cùng runtime, system tool và library vào một container tiêu chuẩn, giải quyết tình trạng không nhất quán kiểu 'chạy được trên máy của tôi'."
+    },
+    {
+      question: "Từ góc độ vận hành và hạ tầng, tại sao container hiệu quả hơn Virtual Machine?",
+      options: [
+        "Container cho phép kiểm soát tài nguyên chi tiết hơn và đạt mật độ cao hơn trên các host machine mà không cần ảo hóa phần cứng",
+        "Container tự động tăng gấp đôi tốc độ xung nhịp CPU của host",
+        "Container không sử dụng RAM hoặc dung lượng đĩa",
+        "Container chỉ chạy bên trong web browser"
+      ],
+      correctIndex: 0,
+      explanation: "Vì container dùng chung kernel của host thay vì chạy kernel OS riêng cho từng ứng dụng, bạn có thể đặt nhiều workload hơn đáng kể lên cùng một phần cứng compute."
+    },
+    {
+      question: "Theo phần giới thiệu, mô tả nào sau đây phù hợp nhất với định nghĩa về Docker?",
+      options: [
+        "Một công cụ open source tự động hóa việc triển khai ứng dụng bên trong container bằng virtualization ở cấp OS trên Linux",
+        "Một nhà cung cấp cloud hosting độc quyền cho các trang HTML tĩnh",
+        "Một ngôn ngữ lập trình được thiết kế để thay thế Python và JavaScript",
+        "Một database engine dùng để lưu trữ dữ liệu JSON không có cấu trúc"
+      ],
+      correctIndex: 0,
+      explanation: "Docker cung cấp thêm một lớp abstraction và automation cho virtualization ở cấp OS trên Linux, cho phép triển khai ứng dụng nhanh chóng và được cô lập."
+    }
+  ]}
+/>

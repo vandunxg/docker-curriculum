@@ -1,0 +1,58 @@
+---
+title: Bài kiểm tra
+description: Kiểm tra kiến thức của bạn về Docker Compose, mạng multi-container, volume và các lệnh orchestration.
+---
+
+import Quiz from '../../../../components/Quiz.astro';
+
+Kiểm tra mức độ hiểu của bạn về các khái niệm được trình bày trong chương **Môi trường multi-container**.
+
+<Quiz
+  title="Chương 5: Kiểm tra kiến thức về môi trường multi-container"
+  questions={[
+    {
+      question: "Tại sao nên tạo bridge network do người dùng định nghĩa (`docker network create`) thay vì dựa vào bridge network mặc định khi kết nối nhiều container?",
+      options: [
+        "Các network do người dùng định nghĩa cung cấp khả năng tự động service discovery (phân giải DNS bằng tên container/service) và cô lập network giữa các stack",
+        "Bridge network mặc định không hỗ trợ kết nối TCP",
+        "Các network do người dùng định nghĩa hoạt động mà không sử dụng tài nguyên CPU của host",
+        "Bridge network mặc định giới hạn container ở 1 MB bộ nhớ"
+      ],
+      correctIndex: 0,
+      explanation: "Các container trên bridge network do người dùng định nghĩa có thể tự động phân giải tên container hoặc service của nhau thành địa chỉ IP thông qua Docker DNS, đồng thời cung cấp khả năng cô lập network an toàn."
+    },
+    {
+      question: "Thuộc tính nào trong file Docker Compose đảm bảo các container phụ thuộc (chẳng hạn database service `es`) được khởi động trước application service `web`?",
+      options: [
+        "depends_on",
+        "require_first",
+        "links_to",
+        "after_service"
+      ],
+      correctIndex: 0,
+      explanation: "Directive `depends_on` trong `docker-compose.yml` chỉ định thứ tự phụ thuộc, yêu cầu Compose tạo và khởi động các service tiên quyết trước."
+    },
+    {
+      question: "Lệnh nào khởi động tất cả service được định nghĩa trong file `docker-compose.yml` ở chế độ chạy nền (detached)?",
+      options: [
+        "docker compose start",
+        "docker compose up -d",
+        "docker compose run --bg",
+        "docker compose launch"
+      ],
+      correctIndex: 1,
+      explanation: "Chạy `docker compose up -d` sẽ tạo network, volume và container được định nghĩa trong stack của bạn, rồi chạy chúng ở chế độ detached."
+    },
+    {
+      question: "Lệnh nào dừng các container và network do Docker Compose tạo ra, đồng thời xóa các persistent volume có tên?",
+      options: [
+        "docker compose stop",
+        "docker compose down -v",
+        "docker compose delete --all",
+        "docker compose prune"
+      ],
+      correctIndex: 1,
+      explanation: "`docker compose down` dừng container và network, còn thêm `-v` sẽ xóa cả các volume có tên được khai báo trong block `volumes:`."
+    }
+  ]}
+  />

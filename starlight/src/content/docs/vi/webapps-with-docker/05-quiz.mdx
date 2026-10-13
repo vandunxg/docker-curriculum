@@ -1,0 +1,64 @@
+---
+title: Bài kiểm tra
+description: Kiểm tra kiến thức của bạn về Dockerfile, layer caching, việc build image tùy chỉnh và chạy web application.
+---
+
+import Quiz from '../../../../components/Quiz.astro';
+
+Hãy kiểm tra mức độ hiểu của bạn về các khái niệm trong chương **Webapp với Docker**.
+
+<Quiz
+  title="Kiểm tra kiến thức Chương 4: Webapp với Docker"
+  questions={[
+    {
+      question: "Trong `docker run -p 8888:5000 myapp`, ánh xạ port `-p 8888:5000` chỉ định điều gì?",
+      options: [
+        "Nó ánh xạ port 8888 trên host tới port 5000 trong container",
+        "Nó ánh xạ port 8888 trong container tới port 5000 trên host",
+        "Nó giới hạn mức sử dụng memory ở 8888 MB và CPU ở 5000 MHz",
+        "Nó gán các địa chỉ IP ngẫu nhiên trong khoảng từ 8888 đến 5000"
+      ],
+      correctIndex: 0,
+      explanation: "Cú pháp `-p [HOST_PORT]:[CONTAINER_PORT]` ánh xạ traffic đi đến port 8888 trên host machine của bạn tới port 5000 bên trong container."
+    },
+    {
+      question: "Instruction nào trong Dockerfile thiết lập base image cho các instruction build tiếp theo?",
+      options: ["FROM", "BASE", "INIT", "IMAGE"],
+      correctIndex: 0,
+      explanation: "Instruction `FROM` khởi tạo một build stage mới và chỉ định base image (ví dụ: `python:3.12-slim`) dùng để xây dựng image của bạn."
+    },
+    {
+      question: "Tại sao việc copy `requirements.txt` và chạy `pip install` TRƯỚC KHI copy phần còn lại của application code (`COPY . .`) lại là best practice?",
+      options: [
+        "Vì Python sẽ báo lỗi nếu requirements.txt được copy cùng lúc với application code",
+        "Để tận dụng layer caching của Docker, nhờ đó các layer cài dependency không thay đổi được tái sử dụng khi chỉnh sửa code",
+        "Vì `COPY . .` xóa mọi file đã tồn tại trước đó trong container",
+        "Để giảm dung lượng disk của container trên AWS"
+      ],
+      correctIndex: 1,
+      explanation: "Docker cache từng layer của mỗi bước build. Bằng cách cài dependency trước, Docker sẽ tái sử dụng layer `pip install` đã cache khi chỉ có source code của application thay đổi."
+    },
+    {
+      question: "Khác biệt chính giữa `RUN` và `CMD` trong Dockerfile là gì?",
+      options: [
+        "`RUN` thực thi command trong quá trình build image để tạo các layer mới, còn `CMD` chỉ định lệnh mặc định khi khởi chạy container",
+        "`RUN` thực thi khi khởi động container, còn `CMD` thực thi trong thời gian build",
+        "`RUN` dùng để thiết lập environment variable, còn `CMD` dùng để copy file",
+        "Không có khác biệt; `RUN` và `CMD` là các alias giống hệt nhau"
+      ],
+      correctIndex: 0,
+      explanation: "`RUN` thực thi shell command trong quá trình `docker build` để tạo các layer của image. `CMD` chỉ định command mặc định được thực thi khi chạy `docker run`."
+    },
+    {
+      question: "Khi triển khai một application single-container lên AWS Elastic Beanstalk, file nào được upload để cấu hình tên image và ánh xạ port?",
+      options: [
+        "Dockerrun.aws.json",
+        "aws-compose.yml",
+        "Dockerfile.aws",
+        "beanstalk.config"
+      ],
+      correctIndex: 0,
+      explanation: "`Dockerrun.aws.json` là file cấu hình dành riêng cho AWS, cho Elastic Beanstalk biết cần pull Docker image nào và expose những port nào."
+    }
+  ]}
+/>

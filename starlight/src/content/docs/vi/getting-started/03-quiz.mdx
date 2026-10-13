@@ -1,0 +1,58 @@
+---
+title: Kiểm tra
+description: Kiểm tra kiến thức của bạn về cài đặt Docker, WSL 2, các điều kiện cần và xác minh hệ thống.
+---
+
+import Quiz from '../../../../components/Quiz.astro';
+
+Kiểm tra mức độ hiểu của bạn về các khái niệm được trình bày trong chương **Bắt đầu**.
+
+<Quiz
+  title="Chương 2: Kiểm tra kiến thức về Bắt đầu"
+  questions={[
+    {
+      question: "Ứng dụng chính thức nào cung cấp bảng điều khiển đồ họa, Docker Engine, CLI và Docker Compose ngay khi cài đặt cho Mac, Windows và Linux?",
+      options: [
+        "Docker Desktop",
+        "Docker Server Manager",
+        "Linux Kernel Manager",
+        "VirtualBox Hypervisor"
+      ],
+      correctIndex: 0,
+      explanation: "Docker Desktop là ứng dụng chính thức cho Mac, Windows và Linux, bao gồm Docker Engine, các công cụ CLI, Compose và Kubernetes."
+    },
+    {
+      question: "Trên Windows, Docker Desktop mặc định sử dụng công nghệ nào làm backend để đảm bảo khả năng tương thích đầy đủ với Linux kernel và tốc độ gần như native?",
+      options: [
+        "WSL 2 (Windows Subsystem for Linux 2)",
+        "Hyper-V Legacy Mode",
+        "MS-DOS Emulation",
+        "Wine Emulation Layer"
+      ],
+      correctIndex: 0,
+      explanation: "Docker Desktop trên Windows tận dụng WSL 2 để chạy một Linux utility VM nhẹ, cung cấp khả năng tương thích đầy đủ với Linux kernel và hiệu năng cao."
+    },
+    {
+      question: "Tutorial khuyến nghị dùng command nào để kiểm thử bản cài đặt Docker mới và xác minh mọi thứ đang hoạt động đúng cách?",
+      options: [
+        "docker run hello-world",
+        "docker test system",
+        "docker verify install",
+        "docker start engine"
+      ],
+      correctIndex: 0,
+      explanation: "Chạy `docker run hello-world` sẽ pull một image kiểm thử nhỏ, khởi chạy một container, in thông báo chào mừng mang tính thông tin và xác minh bản cài đặt của bạn."
+    },
+    {
+      question: "Hai tài khoản cloud bên ngoài nào được khuyến nghị là điều kiện cần để thực hiện các phần triển khai thực hành trong curriculum này?",
+      options: [
+        "Docker Hub và Amazon Web Services (AWS)",
+        "GitHub và Google Cloud Platform (GCP)",
+        "Microsoft Azure và DigitalOcean",
+        "Heroku và Netlify"
+      ],
+      correctIndex: 0,
+      explanation: "Tutorial sử dụng Docker Hub để publish các container image và Amazon Web Services (AWS Elastic Beanstalk / ECS) để triển khai lên cloud."
+    }
+  ]}
+/>

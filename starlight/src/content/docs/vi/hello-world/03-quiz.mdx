@@ -1,0 +1,58 @@
+---
+title: Quiz
+description: Kiểm tra kiến thức của bạn về việc chạy container, shell tương tác, cơ chế cô lập container và các lệnh dọn dẹp.
+---
+
+import Quiz from '../../../../components/Quiz.astro';
+
+Hãy kiểm tra mức độ hiểu của bạn về các khái niệm đã được trình bày trong chương **Hello World**.
+
+<Quiz
+  title="Chương 3: Kiểm tra kiến thức về Hello World"
+  questions={[
+    {
+      question: "Theo thuật ngữ của Docker, mối quan hệ chính xác giữa Docker Image và Docker Container là gì?",
+      options: [
+        "Image là một process đang chạy có thể thực thi, còn Container là một tệp zip được lưu trên đĩa",
+        "Image là blueprint bất biến chứa code và các thư viện, còn Container là một instance có thể chạy được tạo từ một image",
+        "Không có sự khác biệt; Image và Container là các thuật ngữ có thể thay thế cho nhau để chỉ cùng một khái niệm",
+        "Container chỉ tồn tại trong cloud registry, còn Image chỉ tồn tại trên máy cục bộ của bạn"
+      ],
+      correctIndex: 1,
+      explanation: "Image đóng vai trò là blueprint (template) chỉ đọc của ứng dụng, còn Container là các instance biệt lập, có thể chạy được và được khởi tạo từ những image đó."
+    },
+    {
+      question: "Lệnh nào tải một Docker image (chẳng hạn như `busybox`) từ Docker Hub về máy cục bộ mà không thực thi image đó?",
+      options: [
+        "docker pull busybox",
+        "docker fetch busybox",
+        "docker download busybox",
+        "docker get busybox"
+      ],
+      correctIndex: 0,
+      explanation: "Lệnh `docker pull` lấy image được chỉ định từ một registry từ xa (chẳng hạn như Docker Hub) và lưu image đó vào bộ nhớ đệm Docker image cục bộ của bạn."
+    },
+    {
+      question: "Nếu bạn tạo một tệp văn bản bên trong interactive container shell (`docker run -it busybox sh`) rồi thoát, điều gì xảy ra khi bạn khởi động một container mới từ cùng image đó?",
+      options: [
+        "Tệp văn bản sẽ tự động xuất hiện trong container mới",
+        "Tệp văn bản sẽ được lưu trên desktop của máy host",
+        "Tệp văn bản sẽ không xuất hiện vì các container là những instance biệt lập và mới hoàn toàn",
+        "Docker sẽ báo lỗi xung đột tệp và từ chối khởi động"
+      ],
+      correctIndex: 2,
+      explanation: "Container Docker có file system biệt lập và tạm thời. Các thay đổi bên trong một instance container không được duy trì trong các instance container mới, trừ khi được mount vào volumes."
+    },
+    {
+      question: "Flag nào truyền cho `docker run` sẽ tự động dọn dẹp và xóa instance container sau khi process của nó hoàn tất?",
+      options: [
+        "--rm",
+        "--clean",
+        "-d",
+        "--auto-delete"
+      ],
+      correctIndex: 0,
+      explanation: "Flag `--rm` yêu cầu Docker tự động xóa container và file system tạm thời của container ngay khi container thoát, nhờ đó tránh làm đầy đĩa."
+    }
+  ]}
+/>

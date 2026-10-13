@@ -1,0 +1,80 @@
+---
+title: Docker Curriculum
+description: Hướng dẫn Docker thực hành về container, Dockerfile, Compose, ứng dụng nhiều container và triển khai lên AWS.
+template: splash
+tableOfContents: false
+---
+
+import { Image } from 'astro:assets';
+import Icon from '../../../../node_modules/@astrojs/starlight/user-components/Icon.astro';
+import dockerLogo from '../../../assets/logo.png';
+
+<div class="dc-home not-content">
+  <section class="dc-hero" aria-labelledby="dc-home-title">
+    <div class="dc-hero-copy">
+      <p class="dc-eyebrow">Hướng dẫn Docker thực hành</p>
+      <h1 id="dc-home-title" class="dc-hero-title">Học Docker bằng cách xây dựng ứng dụng thực tế.</h1>
+      <p>
+        Bắt đầu với <code>docker run</code>, đóng gói ứng dụng Flask, kết nối ứng dụng với Elasticsearch bằng Compose và triển khai lên AWS. Không yêu cầu kinh nghiệm về Docker.
+      </p>
+      <div class="dc-hero-actions">
+        <a class="dc-button dc-button-primary" href="/introduction/00-docker/">Bắt đầu học</a>
+        <a class="dc-button dc-button-secondary" href="https://github.com/prakhar1989/docker-curriculum" target="_blank" rel="noopener">Xem trên GitHub</a>
+      </div>
+    </div>
+
+    <div class="dc-hero-visual">
+      <Image src={dockerLogo} alt="Docker cho người mới bắt đầu" class="dc-hero-logo" />
+      <div class="dc-terminal-card" aria-label="Curriculum preview">
+        <div class="dc-terminal-bar"><span class="dc-terminal-dot"></span><span>docker-curriculum ~ ready</span></div>
+        <pre class="dc-terminal-command"><strong>$</strong> docker run hello-world
+<strong>→</strong> write your first Dockerfile
+<strong>→</strong> run Flask + Elasticsearch with Compose
+<strong>→</strong> deploy the app to AWS</pre>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="dc-path-title">
+    <div class="dc-section-heading">
+      <h2 id="dc-path-title">Chọn nơi bắt đầu</h2>
+    </div>
+
+    <div class="dc-paths">
+      <a class="dc-path-card" href="/introduction/00-docker/">
+        <span class="dc-path-number">01 / NỀN TẢNG</span>
+        <h3>Bắt đầu với những điều cơ bản</h3>
+        <p>Tìm hiểu cách image và container hoạt động, cũng như Docker khác với máy ảo như thế nào.</p>
+      </a>
+      <a class="dc-path-card" href="/webapps-with-docker/00-static-sites/">
+        <span class="dc-path-number">02 / DOCKERFILES</span>
+        <h3>Đưa một webapp vào container</h3>
+        <p>Phục vụ một static site bằng Nginx, sau đó đóng gói ứng dụng Flask vào image của riêng bạn.</p>
+      </a>
+      <a class="dc-path-card" href="/multi-container-environments/00-introduction/">
+        <span class="dc-path-number">03 / COMPOSE</span>
+        <h3>Kết nối hai service</h3>
+        <p>Chạy ứng dụng Food Trucks với Flask và Elasticsearch bằng Docker networking và Compose.</p>
+      </a>
+      <a class="dc-path-card" href="/modern-docker/00-introduction/">
+        <span class="dc-path-number">04 / DOCKER HIỆN ĐẠI</span>
+        <h3>Tăng tốc và bảo mật build</h3>
+        <p>Sử dụng multi-stage build, nhắm đến ARM và x86, đồng bộ code bằng Compose Watch và tăng cường bảo mật cho container.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer class="dc-home-footer">
+    <span>Được viết và phát triển bởi <a href="https://github.com/prakhar1989" target="_blank" rel="noopener">Prakhar Srivastav</a>.</span>
+    <nav class="dc-social-links" aria-label="Social links">
+      <a class="dc-social-link" href="https://github.com/prakhar1989" target="_blank" rel="noopener" aria-label="GitHub">
+        <Icon name="github" />
+        <span>GitHub</span>
+      </a>
+      <a class="dc-social-link" href="https://www.linkedin.com/in/prakharsrivastav/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <Icon name="linkedin" />
+        <span>LinkedIn</span>
+      </a>
+    </nav>
+  </footer>
+</div>

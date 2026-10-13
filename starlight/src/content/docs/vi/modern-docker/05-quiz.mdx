@@ -1,0 +1,69 @@
+---
+title: Bài trắc nghiệm
+description: Kiểm tra kiến thức của bạn về Multi-Stage Builds, BuildKit, Compose Watch và các best practices về bảo mật container.
+---
+
+import Quiz from '../../../../components/Quiz.astro';
+
+Kiểm tra mức độ hiểu của bạn về các khái niệm được trình bày trong chương **Docker hiện đại và Best Practices**.
+
+<Quiz
+  title="Chương 6: Kiểm tra kiến thức về Docker hiện đại"
+  questions={[
+    {
+      question: "Lợi ích kỹ thuật chính của multi-stage build trong Dockerfile là gì?",
+      options: [
+        "Cho phép biên dịch code ở các stage đầu bằng đầy đủ SDK, sau đó chỉ copy các artifact đã build vào runtime image tối giản, giúp giảm kích thước image và attack surface",
+        "Tự động chạy unit test trong trình duyệt web",
+        "Cho phép chạy nhiều web server trên cùng một port",
+        "Thay thế các file Docker Compose"
+      ],
+      correctIndex: 0,
+      explanation: "Multi-stage build tách các dependency lúc build (compiler, devDependencies) khỏi các yêu cầu lúc runtime, tạo ra image nhỏ hơn đáng kể và an toàn hơn."
+    },
+    {
+      question: "Tại sao việc build Docker image trên máy Mac Apple Silicon (M1/M2/M3/M4) mà không chỉ định platform có thể gây ra `exec format error` khi triển khai lên server AWS EC2 tiêu chuẩn?",
+      options: [
+        "Vì Mac build binary cho kiến trúc ARM64, trong khi server EC2 cloud tiêu chuẩn chạy trên kiến trúc CPU AMD64/x86_64",
+        "Vì macOS mặc định sử dụng file executable của Windows",
+        "Vì AWS EC2 không hỗ trợ Linux container",
+        "Vì Docker Hub chỉ cho phép image nhỏ hơn 1 MB"
+      ],
+      correctIndex: 0,
+      explanation: "Mac Apple Silicon sử dụng CPU ARM64, trong khi server cloud tiêu chuẩn sử dụng AMD64/x86_64. Dùng `docker buildx build --platform linux/amd64` để bảo đảm build chéo cho các host cloud x86."
+    },
+    {
+      question: "Tính năng nào được giới thiệu trong Docker Compose V2, tự động theo dõi các chỉnh sửa source code và đồng bộ file hoặc rebuild service một cách thông minh theo thời gian thực?",
+      options: [
+        "Compose Watch (`docker compose up --watch`)",
+        "Compose Sync (`docker compose sync`)",
+        "Docker Live Reload",
+        "Container Hot Swap"
+      ],
+      correctIndex: 0,
+      explanation: "`docker compose watch` theo dõi các file trong project và tự động đồng bộ thay đổi code vào container đang chạy hoặc rebuild service khi manifest dependency thay đổi."
+    },
+    {
+      question: "Tại sao việc chạy container bằng tài khoản user không phải root (`USER appuser` trong Dockerfile) lại là một best practice quan trọng về bảo mật?",
+      options: [
+        "Ngăn attacker giành được quyền root trên hệ điều hành host nếu một lỗ hổng trong ứng dụng bị khai thác bên trong container",
+        "Container không phải root chạy nhanh hơn container root 50%",
+        "Docker Hub từ chối mọi image chạy với quyền root",
+        "User root không thể đọc environment variable"
+      ],
+      correctIndex: 0,
+      explanation: "Chạy dưới quyền không phải root giới hạn blast radius của các exploit có khả năng thoát khỏi container, bảo đảm attacker không thể có đặc quyền root trên host bên dưới."
+    },
+    {
+      question: "Công cụ Docker CLI tích hợp sẵn nào cho phép developer quét Docker image để tìm lỗ hổng bảo mật (CVE) và các khuyến nghị cập nhật base image?",
+      options: [
+        "docker scout",
+        "docker audit",
+        "docker scan-all",
+        "docker guard"
+      ],
+      correctIndex: 0,
+      explanation: "`docker scout` (ví dụ `docker scout quickview` hoặc `docker scout cves`) phân tích các layer của image và báo cáo các lỗ hổng đã biết cùng khuyến nghị bản vá."
+    }
+  ]}
+/>
