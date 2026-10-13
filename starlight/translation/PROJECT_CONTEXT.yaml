@@ -1,0 +1,76 @@
+# Canonical project configuration. Paths are relative to the repository root.
+schema_version: 1
+base_version: 1.0.0
+context_revision: 1
+status: ready
+project:
+  id: docker-curriculum-vi
+  title: "Docker Curriculum — bản tiếng Việt"
+  audience: "Developer học Docker và triển khai ứng dụng bằng tiếng Việt"
+  source_languages: [en]
+  target_language: vi-VN
+source:
+  kind: starlight-docs
+  location: "starlight/src/content/docs/"
+  edition_or_version: "Docker Curriculum documentation"
+  scope_include:
+    - "starlight/src/content/docs/**/*.md"
+    - "starlight/src/content/docs/**/*.mdx"
+  scope_exclude:
+    - "starlight/src/content/docs/vi/**"
+    - "starlight/src/assets/**"
+    - "starlight/src/components/**"
+    - "starlight/src/styles/**"
+mapping:
+  - source: "starlight/src/content/docs/**/*.md"
+    target: "starlight/src/content/docs/vi/**/*.md"
+    mode: mirror
+  - source: "starlight/src/content/docs/**/*.mdx"
+    target: "starlight/src/content/docs/vi/**/*.mdx"
+    mode: mirror
+policies:
+  fidelity: faithful
+  code_and_commands: preserve
+  docker_configuration: preserve
+  identifiers: preserve
+  numeric_literals: preserve
+  external_links: preserve
+  internal_links: mapped_to_vi_mirror_when_target_exists
+  image_assets: preserve_filename_and_destination
+  image_alt_text: translate_prose
+  mdx_components_and_props: preserve_structure
+  terminology: natural_technical_vietnamese
+  translator_additions: disallow_in_translation
+execution:
+  mode: parallel
+  unit_policy: whole-file
+  ownership: one-agent-one-file
+  max_workers: "bounded by runtime capacity"
+  review_mode: self-review-per-file-then-batch
+  retry_failed_units_only: true
+  worker_read_set:
+    - "starlight/translation/RULE.md"
+    - assigned source Markdown or MDX file
+  worker_write_set:
+    - assigned target file under "starlight/src/content/docs/vi/"
+  coordinator_write_set:
+    - "starlight/translation/**"
+    - batch fixes outside worker ownership when explicitly needed
+  lifecycle:
+    - assign one source-target pair
+    - read the full source
+    - translate the full target end-to-end
+    - reread the target once
+    - finish the worker
+    - run batch validation after all workers complete
+git:
+  commit: false
+  push: false
+  deploy: false
+validation:
+  required:
+    - source files remain unchanged
+    - every assigned source has exactly one target
+    - protected content and MDX structure are preserved
+    - Markdown and MDX structure and links remain valid
+    - image references resolve from the vi mirror
